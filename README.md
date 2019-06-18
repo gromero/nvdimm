@@ -35,7 +35,7 @@ That's all for QEMU-kvm.
 
 ## Linux
 
-You'll need the following patchset:
+You'll need the following out-of-tree patchset:
 ```
 gromero@image:~/git/linux$ git log --oneline -10
 8d7d63682145 (HEAD -> master_powerpc) mm: Move MAP_SYNC to asm-generic/mman-common.h
