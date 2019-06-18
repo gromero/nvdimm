@@ -88,6 +88,16 @@ Opening file /mnt/pmem/test/706 ...
 File mmap'ed to address = 0x727733ad0000
 ```
 
+And after that you can inspect the file in pmem dev:
+```
+/mnt/pmem/test$ hexdump -c ./706
+0000000   X  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+0000010  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0  \0
+*
+0010000
+```
+... where you should find 'X' char.
+
 You can use `ptest` also to verify what happens when pmem is not mounted with
 '-o dax' flag, i.e. wo/ DAX support, or when you try to use it against any other
 fs without DAX:
