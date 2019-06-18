@@ -107,12 +107,12 @@ Opening file /tmp/blah/706 ...
 mmap(): Operation not supported
 ```
 
-## Thanks
+## Thanks to
 
-Murilo Opsfelder
-Shivaprasad Bhat
-Vaibhav Jain
-Oliver O'Halloran
-Aneesh Kumar K.V
+Murilo Opsfelder  
+Shivaprasad Bhat  
+Vaibhav Jain  
+Oliver O'Halloran  
+Aneesh Kumar K.V  
 
 (All screw-ups are my fault)
