@@ -11,41 +11,49 @@
 #include <sys/mman.h>
 #include <string.h>
 
-#define SIZE 		64*1024 // (1 page)
+/**
+ * Thing here is only mmap() a pmem device and write char 'X' to it
+ * using the 'std' store instruction. The MAP_SYNC and MAP_SYNC_VALIDATE
+ * flags must be supported.
+ */
+
+#define SIZE 		64*1024 // (1 page) or the size as you please
 
 #define MAP_SYNC 0x80000
 #define MAP_SHARED_VALIDATE 0x03
 
 int main(int argc, char *argv[])
 {
-  int pid;
-  char hsperfdir[] = "/mnt/pmem/test";
-  char hsperffile[128];
+  int n;
+  char *dir;
+  char filename[128];
   int fd;
   int r;
   struct stat sinfo;
   char *mmaped_address;
 
-  pid = 706; // fake pid
-  sprintf(hsperffile, "%s/%d", hsperfdir, pid);
+  n = 706; // any random number here for the file name
+  dir = argc == 2 ? argv[1] : "/mnt/pmem/test";
 
-  // check if /hsperdata_jvmtests exists in /tmp; if not, create it
-  r = stat(hsperfdir, &sinfo);
+  sprintf(filename, "%s/%d", dir, n);
+
+  // check if full path exists, if not, create it
+  r = stat(dir, &sinfo);
   if (r == -1) {
     if (errno == ENOENT) {
-      r = mkdir(hsperfdir, 0755);
+      r = mkdir(dir, 0755);
       if (r == -1) {
         perror("mkdir()");
         exit(1);
       }
-    } else { // another error so don't continue
+    } else { // another (unknown) error so don't continue
       perror("stat()");
       exit(1);
     }
   }
 
-  printf("Opening file %s ...\n", hsperffile);
-  fd = open(hsperffile, O_RDWR|O_CREAT|O_NOFOLLOW, S_IRUSR|S_IWUSR);
+  printf("Opening file %s ...\n", filename);
+  fd = open(filename, O_RDWR|O_CREAT|O_NOFOLLOW, S_IRUSR|S_IWUSR);
   if (fd == -1) {
     perror("open()");
     exit(1);
@@ -92,10 +100,10 @@ int main(int argc, char *argv[])
   // zero mmap'ed address
   memset((void*) mmaped_address, 0, SIZE);
 
+  // write 'X' char by performing a simple store
   asm (
-       "li 3, 'x';"
+       "li 3, 'X';"
        "std 3, 0(%[pmem]);"
-       "li 3, 0;"
        :
        : [pmem] "r" (mmaped_address)
        :
