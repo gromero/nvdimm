@@ -37,7 +37,7 @@ That's all for QEMU-kvm.
 
 You'll need the following _out-of-tree_ patchset:
 ```
-gromero@image:~/git/linux$ git log --oneline -10
+user@guest:~/git/linux$ git log --oneline -10
 8d7d63682145 (HEAD -> master_powerpc) mm: Move MAP_SYNC to asm-generic/mman-common.h
 33e3792a9c41 mm/nvdimm: Fix endian conversion issues 
 b43722793bfb mm/nvdimm: Use correct alignment when looking at first pfn from a region
