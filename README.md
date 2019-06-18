@@ -1,7 +1,7 @@
 ## Introduction
 
 This tiny recipe shows how to get NVDIMM emulation on PPC64 using QEMU-kvm, i.e.
-get a /dev/pmem0 device that can be mounte with `-o dax` flag and then be mapped
+get a /dev/pmem0 device that can be mounted w/ `-o dax` flag and then be mapped
 using new `MAP_SYNC` and `MAP_SHARED_VALIDATE` `mmap()` flags, so normal storage
 load/store instructions can be used to read/write data to the persistent device.
 
