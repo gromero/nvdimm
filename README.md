@@ -83,7 +83,7 @@ formatting the `/dev/pmem0` device, otherwise you gonna see the following dmesg:
 Now you can use `ptest.c` to check if it's possible to write the pmem device
 with DAX support. If you can, you must get a mmap like:
 ```
-~/git/nvdimm$ ./ptest 
+~/git/nvdimm$ ./ptest
 Opening file /mnt/pmem/test/706 ...
 File mmap'ed to address = 0x727733ad0000
 ```

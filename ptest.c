@@ -107,7 +107,7 @@ int main(int argc, char *argv[])
        :
        : [pmem] "r" (mmaped_address)
        :
-      );  
+      );
 
   exit(0);
 }
